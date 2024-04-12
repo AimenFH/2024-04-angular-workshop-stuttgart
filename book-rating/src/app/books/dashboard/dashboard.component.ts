@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Book } from '../shared/book';
 import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 import { BookComponent } from '../book/book.component';
+import { BookRatingService } from '../shared/book-rating.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,8 @@ import { BookComponent } from '../book/book.component';
 export class DashboardComponent {
 
   jetzt = new Date();
+
+  br = inject(BookRatingService);
 
   books: Book[] = [{
     isbn: '000',
