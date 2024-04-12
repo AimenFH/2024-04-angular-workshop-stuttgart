@@ -10,17 +10,8 @@
       </div>
       <p>{{ book.description }}</p>
 
-      <!--
-        ANTI-Pattern
-
-        1. Single Responsibility Principle verletzt
-        2. Code im HTML
-        3. Objekt mutiert
-
-      -->
-
-      <button (click)="book.rating = book.rating - 1" class="btn btn-primary me-2">-</button>
-      <button (click)="book.rating = book.rating + 1" class="btn btn-primary">-</button>
+      <button (click)="doRateDown()" class="btn btn-primary me-2">-</button>
+      <button (click)="doRateUp()" class="btn btn-primary">+</button>
     </div>
   </div>
 }

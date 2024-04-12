@@ -9,7 +9,7 @@ import { routes } from './app.routes';
 registerLocaleData(localeDe);
 
 
-console.log(localeDe)
+// console.log(localeDe)
 
 
 export const appConfig: ApplicationConfig = {
