@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../shared/book';
 
 @Component({
@@ -6,7 +6,8 @@ import { Book } from '../shared/book';
   standalone: true,
   imports: [],
   templateUrl: './book.component.html',
-  styleUrl: './book.component.scss'
+  styleUrl: './book.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent {
 
