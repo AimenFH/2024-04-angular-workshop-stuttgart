@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { Component, Input } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
+import { BookRatingService } from '../shared/book-rating.service';
 
 
 @Component({
@@ -20,8 +21,18 @@ describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
 
   beforeEach(async () => {
+
+    const bookRatingMock = {
+      rateUp: (book: Book) => book
+      // Absichtlich kein rateDown ("halbes Entchen")
+    }
+
     await TestBed.configureTestingModule({
-      imports: [DashboardComponent]
+      imports: [DashboardComponent],
+      providers: [{
+        provide: BookRatingService,
+        useValue: bookRatingMock
+      }]
     })
     // Unit Test (Kind-Komponente ersetzen)
     .overrideComponent(DashboardComponent, {
@@ -35,7 +46,14 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('doRateUp() should call the BookRatingService', () => {
+
+    const rs = TestBed.inject(BookRatingService);
+    spyOn(rs, 'rateUp').and.callThrough();
+
+    const book = { } as Book;
+    component.doRateUp(book);
+
+    expect(rs.rateUp).toHaveBeenCalledOnceWith(book);
   });
 });
