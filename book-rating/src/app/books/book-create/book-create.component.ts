@@ -37,10 +37,20 @@ export class BookCreateComponent {
     return control.touched && control.invalid;
   }
 
+  hasError(control: FormControl, errorCode: string) {
+    return control.touched && control.hasError(errorCode);
+  }
+
   // TODO: hasError(control: FormControl, errorCode: string)
   // zB. hasError(c.isbn, 'minlength')
 
   submitForm() {
+
+    if (this.bookForm.invalid) {
+      this.bookForm.markAllAsTouched();
+      return;
+    }
+
     const newBook: Book = {
       ...this.bookForm.getRawValue(),
       rating: 1
