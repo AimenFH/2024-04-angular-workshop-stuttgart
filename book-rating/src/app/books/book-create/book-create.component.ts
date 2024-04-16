@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'app-book-create',
@@ -27,4 +28,23 @@ export class BookCreateComponent {
     })
   });
 
+  c = this.bookForm.controls;
+
+  isInvalid(control: FormControl) {
+    return control.touched && control.invalid;
+  }
+
+  // TODO: hasError(control: FormControl, errorCode: string)
+  // zB. hasError(c.isbn, 'minlength')
+
+  submitForm() {
+    const newBook: Book = {
+      ...this.bookForm.getRawValue(),
+      rating: 1
+    }
+
+    // ???
+
+    this.bookForm.reset();
+  }
 }
