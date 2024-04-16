@@ -3,11 +3,12 @@ import { Book } from '../shared/book';
 import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 import { BookComponent } from '../book/book.component';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookCreateComponent } from '../book-create/book-create.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [JsonPipe, UpperCasePipe, DatePipe, BookComponent],
+  imports: [JsonPipe, UpperCasePipe, DatePipe, BookComponent, BookCreateComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush
