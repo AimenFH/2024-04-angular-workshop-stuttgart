@@ -6,6 +6,12 @@
     @if (isInvalid(c.isbn)) {
       <div class="feedback-error">Die ISBN ist ungültig!</div>
     }
+    @if (hasError(c.isbn, 'required')) {
+      <div class="feedback-error">Bitte geben Sie eine ISBN an!</div>
+    }
+    @if (hasError(c.isbn, 'minlength')) {
+      <div class="feedback-error">Bitte geben Sie mindestens 3 Zeichen an!</div>
+    }
   </div>
 
   <div class="form-group">
