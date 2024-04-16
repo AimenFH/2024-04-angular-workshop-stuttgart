@@ -44,6 +44,10 @@ export class BookCreateComponent {
     }
 
     // ???
+    // 1. Erzeuge ein Event mit dem Namen `create`
+    // 2. Versende das neue Buch
+    // 3. (Subscribe) dich auf das Event im Dashboard
+    // 4. Füge das neue Buch dem Buch-Array hinzu (achte auf Immutability)
 
     this.bookForm.reset();
   }
