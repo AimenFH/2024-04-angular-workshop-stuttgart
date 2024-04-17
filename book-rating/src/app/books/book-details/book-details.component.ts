@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { concatMap, map, mergeMap, of } from 'rxjs';
+import { concatMap, map, mergeMap, of, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
@@ -20,7 +20,7 @@ export class BookDetailsComponent {
   book$ = toSignal(
     inject(ActivatedRoute).paramMap.pipe(
       map(paraMap => paraMap.get('isbn') || ''),
-      concatMap(isbn => this.bs.getSingleBook(isbn))
+      switchMap(isbn => this.bs.getSingleBook(isbn))
     )
   )
 
