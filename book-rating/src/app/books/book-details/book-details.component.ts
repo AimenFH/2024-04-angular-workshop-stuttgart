@@ -1,9 +1,10 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { concatMap, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, concatMap, map, mergeMap, of, retry, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -20,7 +21,16 @@ export class BookDetailsComponent {
   book$ = toSignal(
     inject(ActivatedRoute).paramMap.pipe(
       map(paraMap => paraMap.get('isbn') || ''),
-      switchMap(isbn => this.bs.getSingleBook(isbn))
+      switchMap(isbn => this.bs.getSingleBook(isbn).pipe(
+        retry({
+          count: 2,
+          delay: 500
+        }),
+        catchError((err: HttpErrorResponse) => of({
+          isbn: '000',
+          title: err.message
+        }))
+      ))
     )
   )
 
